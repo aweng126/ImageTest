@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.kingwen.imagetest.Adapters.ItemAdapter;
+import com.example.kingwen.imagetest.Beans.MyItem1;
+import com.example.kingwen.imagetest.Beans.MyItem2;
 import com.example.kingwen.imagetest.Beans.Myitem;
 import com.example.kingwen.imagetest.R;
+import com.example.kingwen.imagetest.Utils.FormatUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -56,14 +59,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        //后期会选择不同的图片，所以暂时不能用for循环来进行更新
-        Myitem item1=new Myitem(R.drawable.img_adam);
-        Myitem item2=new Myitem(R.drawable.img_adam);
-        Myitem item3=new Myitem(R.drawable.img_adam);
+
+
+        /**
+         * item1 uri 是资源文件，通过我们的格式转换方法进行转化
+         */
+        Myitem item1=new MyItem2(FormatUtils.resourceIdToUri(getApplicationContext(),R.drawable.img_adam));
+        /**
+         * item2 uri 是网络文件  幺蛾子头像
+         */
+        Myitem item2=new MyItem1("https://img3.doubanio.com/icon/u99034774-3.jpg");
+        /**
+         * item3  是asset文件
+         */
+        Myitem item3=new MyItem1("assets://img_fei.jpg");
+        /**
+         * item4  是资源文件，格式是gif
+         */
+        Myitem item4=new MyItem2(FormatUtils.resourceIdToUri(getApplicationContext(),R.drawable.gif_fatman));
+
+
 
         itemList.add(item1);
         itemList.add(item2);
         itemList.add(item3);
+        itemList.add(item4);
     }
 
     private void initView() {
